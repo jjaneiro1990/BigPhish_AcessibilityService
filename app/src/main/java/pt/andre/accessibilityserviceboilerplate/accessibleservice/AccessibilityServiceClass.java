@@ -5,6 +5,8 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import pt.andre.accessibilityserviceboilerplate.overlay.Overlay;
+
 public class AccessibilityServiceClass  extends AccessibilityService {
 
     final static String TAG = AccessibilityServiceClass.class.getCanonicalName();
@@ -12,14 +14,8 @@ public class AccessibilityServiceClass  extends AccessibilityService {
     @Override
     protected void onServiceConnected() {
         super.onServiceConnected();
-        AccessibilityServiceInfo info = new AccessibilityServiceInfo();
-        info.flags = AccessibilityServiceInfo.DEFAULT |
-                AccessibilityServiceInfo.FLAG_RETRIEVE_INTERACTIVE_WINDOWS |
-                AccessibilityServiceInfo.FLAG_REPORT_VIEW_IDS;
-        info.eventTypes = AccessibilityEvent.TYPES_ALL_MASK;
-        info.feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC;
-        setServiceInfo(info);
-
+        Overlay.getInstance().setService(this);
+        Overlay.getInstance().showOverlay();
     }
 
     @Override
