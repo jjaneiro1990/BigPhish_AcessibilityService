@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Accessibility service boilerplate</string>
+    <string name="go_to_accessibility_settings">Go to accessibility settings</string>
+</resources>
