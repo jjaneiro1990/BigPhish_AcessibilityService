@@ -5,6 +5,7 @@ import static android.content.Context.WINDOW_SERVICE;
 
 import android.accessibilityservice.AccessibilityService;
 import android.graphics.PixelFormat;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -13,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 import pt.andre.accessibilityserviceboilerplate.R;
 import pt.andre.accessibilityserviceboilerplate.accessibleservice.AccessibilityServiceClass;
@@ -30,7 +33,7 @@ public class Overlay {
     private ViewGroup rootViewGroup;
     private AccessibilityService service;
     private TextView tv;
-
+    TextToSpeech ts;
     private static Overlay instance;
 
     public static Overlay getInstance(){
@@ -76,6 +79,16 @@ public class Overlay {
     }
 
     public void teste(){
+        ts = new TextToSpeech(rootViewGroup.getContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int i) {
+               if(i != TextToSpeech.ERROR){
+                   ts.setLanguage(Locale.FRANCE);
+                   ts.speak("Vous êtes à " + AccessibilityServiceClass.s,TextToSpeech.QUEUE_FLUSH,null);
+               }
+            }
+        });
+
         Toast.makeText(rootViewGroup.getContext(), AccessibilityServiceClass.s,Toast.LENGTH_SHORT).show();
     }
 }
