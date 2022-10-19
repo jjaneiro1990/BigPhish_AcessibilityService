@@ -12,8 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import pt.andre.accessibilityserviceboilerplate.R;
+import pt.andre.accessibilityserviceboilerplate.accessibleservice.AccessibilityServiceClass;
 
 public class Overlay {
     WindowManager.LayoutParams params = new WindowManager.LayoutParams(
@@ -51,7 +53,7 @@ public class Overlay {
 
     public void showOverlay(){
         rootViewGroup = (ViewGroup) li.inflate(R.layout.overlay, null);
-        rootViewGroup.findViewById(R.id.bt_fg).setOnClickListener(v -> {});
+        rootViewGroup.findViewById(R.id.bt_fg).setOnClickListener(v -> teste());
         tv = rootViewGroup.findViewById((R.id.tv_fg));
         params.gravity = Gravity.TOP;
         addView(rootViewGroup, params);
@@ -71,5 +73,9 @@ public class Overlay {
         }catch (IllegalArgumentException e){
             e.printStackTrace();
         }
+    }
+
+    public void teste(){
+        Toast.makeText(rootViewGroup.getContext(), AccessibilityServiceClass.s,Toast.LENGTH_SHORT).show();
     }
 }
