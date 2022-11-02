@@ -4,6 +4,10 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static android.content.Context.WINDOW_SERVICE;
 
 import android.accessibilityservice.AccessibilityService;
+import android.content.ActivityNotFoundException;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.graphics.PixelFormat;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -15,8 +19,10 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.Locale;
 
+import pt.andre.accessibilityserviceboilerplate.MainActivity;
 import pt.andre.accessibilityserviceboilerplate.R;
 import pt.andre.accessibilityserviceboilerplate.accessibleservice.AccessibilityServiceClass;
 
@@ -79,16 +85,12 @@ public class Overlay {
     }
 
     public void teste(){
-        ts = new TextToSpeech(rootViewGroup.getContext(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-               if(i != TextToSpeech.ERROR){
-                   ts.setLanguage(Locale.FRANCE);
-                   ts.speak("Vous êtes à " + AccessibilityServiceClass.s,TextToSpeech.QUEUE_FLUSH,null);
-               }
-            }
-        });
+        if(AccessibilityServiceClass.pack != null){
+            Toast.makeText(rootViewGroup.getContext(), AccessibilityServiceClass.pack,Toast.LENGTH_SHORT).show();
+        }
 
-        Toast.makeText(rootViewGroup.getContext(), AccessibilityServiceClass.s,Toast.LENGTH_SHORT).show();
+
     }
+
+
 }
